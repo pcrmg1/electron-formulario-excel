@@ -23,7 +23,7 @@ function createWindow() {
 
   const frontendUrl = isDev
     ? "http://localhost:5173" // your Vite frontend dev server
-    : pathToFileURL(path.join(__dirname, "dist", "index.html")).toString();
+    : pathToFileURL(path.join(__dirname, "..", "dist", "index.html")).toString();
 
   mainWindow.loadURL(frontendUrl);
 }
