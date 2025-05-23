@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import isDev from "electron-is-dev";
 import expressApp from "./backend/server.js"; // Import Express app
 
@@ -23,7 +23,7 @@ function createWindow() {
 
   const frontendUrl = isDev
     ? "http://localhost:5173" // your Vite frontend dev server
-    : `file://${path.join(__dirname, "renderer", "dist", "index.html")}`;
+    : pathToFileURL(path.join(__dirname, "dist", "index.html")).toString();
 
   mainWindow.loadURL(frontendUrl);
 }
