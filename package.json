@@ -25,7 +25,8 @@
       "dist/**",
       "electron/**",
       "node_modules/**",
-      "package.json"
+      "package.json",
+      "public/**"
     ],
     "directories": {
       "buildResources": "build"

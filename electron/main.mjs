@@ -2,7 +2,7 @@ import { app, BrowserWindow } from "electron";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import isDev from "electron-is-dev";
-import expressApp from "./backend/server.js"; // Import Express app
+import expressApp from "./backend/server.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,20 +16,21 @@ function createWindow() {
     width: 1200,
     height: 800,
     webPreferences: {
-      nodeIntegration: true, // if you need nodeIntegration, else set false
+      nodeIntegration: true,
       contextIsolation: false,
     },
   });
 
   const frontendUrl = isDev
-    ? "http://localhost:5173" // your Vite frontend dev server
-    : pathToFileURL(path.join(__dirname, "..", "dist", "index.html")).toString();
+    ? "http://localhost:5173"
+    : pathToFileURL(
+        path.join(__dirname, "..", "dist", "index.html"),
+      ).toString();
 
   mainWindow.loadURL(frontendUrl);
 }
 
 app.whenReady().then(() => {
-  // Start Express server inside Electron main process
   expressApp.listen(EXPRESS_PORT, () => {
     console.log(`Express server started on http://localhost:${EXPRESS_PORT}`);
   });
